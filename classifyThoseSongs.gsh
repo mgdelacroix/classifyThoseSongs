@@ -133,6 +133,8 @@ void moveSong(song, directoryName) {
 
     new File("${directoryName}${separator}${song.name}") << song.asWritable()
 
+    song.delete()
+
 }
 
 

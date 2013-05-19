@@ -76,7 +76,7 @@ void printDirectoryList(directoryList) {
 
     println ">> Great! where you want to move this song?"
     directoryList.eachWithIndex { dirName, i ->
-        println "    [${i}] ${dirName}"
+        println "    [${i+1}] ${dirName}"
     }
 
 }
@@ -90,19 +90,20 @@ void printDirectoryList(directoryList) {
  */
 void classifySong(song, directoryList) {
 
-    Integer choice = -1
+    Boolean needsChoice = true
 
-    while(choice == -1) {
+    while(needsChoice) {
 
         printDirectoryList(directoryList)
 
         try {
 
-            choice = System.console().readLine('> Choose wisely: ').toInteger()
+            def choice = System.console().readLine('> Choose wisely: ').toInteger()
 
-            if (choice in [0..directoryList.size()]) {
+            if (choice in 1..directoryList.size()) {
 
-                moveSong(song, directoryList[choice])
+                moveSong(song, directoryList[choice-1])
+                needsChoice = false
 
             } else {
 
@@ -112,7 +113,7 @@ void classifySong(song, directoryList) {
 
         } catch (Exception e) {
 
-            println "-- Please, choose one of the following directories using its number"
+            println "-- Please, choose one of the following directories using ITS NUMBER"
 
         }
 
@@ -130,6 +131,8 @@ void classifySong(song, directoryList) {
 void moveSong(song, directoryName) {
 
     def separator = System.getProperty('file.separator')
+
+    println "++ Moving song to ${directoryName}${separator}${song.name}\n"
 
     new File("${directoryName}${separator}${song.name}") << song.asWritable()
 

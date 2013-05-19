@@ -30,7 +30,7 @@ Boolean checkDirectories(directoryList) {
                 println "-- The directory \"${dirName}\" doesn't exist"
                 directoriesOkFlag = false
             }
-        } catch e {
+        } catch (Exception e) {
             println "-- There has been an error trying to check the directory \"${dirName}\""
             directoriesOkFlag = false
         }

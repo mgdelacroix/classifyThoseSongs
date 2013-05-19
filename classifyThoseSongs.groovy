@@ -11,18 +11,41 @@ println '''
                                     /     \\___/                                                              \\___/       
 '''
 
-if (args) {
 
-    def error = false
-    args.each { dirName ->
+/**
+ * Checks that the directories exists
+ *
+ * @param directoryList a list of directory names
+ * @result true if everything is ok, false if it isn't
+ */
+Boolean checkDirectories(directoryList) {
 
-        def dir = new File(dirName)
+    Boolean directoriesOkFlag = true
 
-        if (!dir.exists()) {
-            error = true
+    directoryList.each { dirName ->
+
+        try {
+            File dir = new File(dirName)
+            if (!dir.exists()) {
+                println "-- The directory \"${dirName}\" doesn't exist"
+                directoriesOkFlag = false
+            }
+        } catch e {
+            println "-- There has been an error trying to check the directory \"${dirName}\""
+            directoriesOkFlag = false
         }
 
     }
+
+    return directoriesOkFlag
+
+}
+
+
+// Main code
+if (args.size() >= 2) {
+
+    checkDirectories(args)
 
     def song = new File('08 - Get lucky.mp3')
     new Player(song.newInputStream()).play()

@@ -43,15 +43,19 @@ Boolean checkDirectories(directoryList) {
 
 
 // Main code
+println ">> Checking arguments"
 if (args.size() >= 2) {
 
-    checkDirectories(args)
+    println ">> Checking directory status"
+    if (checkDirectories(args)) {
 
-    def song = new File('08 - Get lucky.mp3')
-    new Player(song.newInputStream()).play()
+        def song = new File('08 - Get lucky.mp3')
+        new Player(song.newInputStream()).play()
+
+    }
 
 } else {
 
-    println "groovyplay DIRECTORIO1 DIRECTORIO2 [DIRECTORIO3] ..."
+    println "-- USAGE: groovyplay DIRECTORIO1 DIRECTORIO2 [DIRECTORIO3] ..."
 
 }

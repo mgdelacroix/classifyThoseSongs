@@ -49,8 +49,22 @@ if (args.size() >= 2) {
     println ">> Checking directory status"
     if (checkDirectories(args)) {
 
-        def song = new File('08 - Get lucky.mp3')
-        new Player(song.newInputStream()).play()
+        println ">> Don't stop the music!!"
+        new File('.').eachFile { file ->
+
+            if (file.name.endsWith('.mp3')) {
+
+                println "++ Now playing => ${file.name}"
+                def song = new File(file.name)
+                new Player(song.newInputStream()).play()
+
+            } else {
+
+                println "-- ${file.name} is not a MP3 file"
+
+            }
+
+        }
 
     }
 

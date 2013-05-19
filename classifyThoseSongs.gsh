@@ -178,6 +178,6 @@ if (args.size() >= 2) {
 
 } else {
 
-    println "-- USAGE: groovyplay DIRECTORIO1 DIRECTORIO2 [DIRECTORIO3] ..."
+    println "-- USAGE: groovyplay DIRECTORY1 DIRECTORY2 [DIRECTORY3] ..."
 
 }

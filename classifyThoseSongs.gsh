@@ -133,8 +133,15 @@ void moveSong(song, directoryName) {
     def separator = System.getProperty('file.separator')
 
     println "++ Moving song to ${directoryName}${separator}${song.name}\n"
+    def destSong = new File("${directoryName}${separator}${song.name}")
 
-    new File("${directoryName}${separator}${song.name}") << song.asWritable()
+    def input = song.newDataInputStream()
+    def output = destSong.newDataOutputStream()
+
+    output << input
+
+    input.close()
+    output.close()
 
     song.delete()
 

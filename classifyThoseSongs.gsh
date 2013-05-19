@@ -120,6 +120,19 @@ void classifySong(song, directoryList) {
 
 }
 
+
+/**
+ * Moves a song to a directory
+ *
+ * @param song the song to move
+ * @param directoryName the name of the directory
+ */
+void moveSong(song, directoryName) {
+
+    def separator = System.getProperty('file.separator')
+
+    new File("${directoryName}${separator}${song.name}") << song.asWritable()
+
 }
 
 

@@ -68,7 +68,9 @@ void classifyDirectory(directoryList) {
 
 
 /**
+ * Shows the directory list in the screen
  *
+ * @param directoryList the directory list
  */
 void printDirectoryList(directoryList) {
 
@@ -88,7 +90,35 @@ void printDirectoryList(directoryList) {
  */
 void classifySong(song, directoryList) {
 
-    printDirectoryList(directoryList)
+    Integer choice = -1
+
+    while(choice == -1) {
+
+        printDirectoryList(directoryList)
+
+        try {
+
+            choice = System.console().readLine('> Choose wisely: ').toInteger()
+
+            if (choice in [0..directoryList.size()]) {
+
+                moveSong(song, directoryList[choice])
+
+            } else {
+
+                println "-- Invalid choice"
+
+            }
+
+        } catch (Exception e) {
+
+            println "-- Please, choose one of the following directories using its number"
+
+        }
+
+    }
+
+}
 
 }
 

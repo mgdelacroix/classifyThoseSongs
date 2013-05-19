@@ -1,6 +1,6 @@
 # classifyThoseSongs
 
-Play your song directory and classify each song afterwards.
+Play your songs directory and classify each song afterwards.
 
 ## Usage
 

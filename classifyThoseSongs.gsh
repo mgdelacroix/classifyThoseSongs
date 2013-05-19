@@ -42,6 +42,73 @@ Boolean checkDirectories(directoryList) {
 }
 
 
+/**
+ * Reads the root directory contents and processes its files
+ *
+ * @param directoryList the list of directories where the user can move the songs
+ */
+void classifyDirectory(directoryList) {
+
+    new File('.').eachFile { file ->
+
+        if (file.name.endsWith('.mp3')) {
+
+            println "++ Now playing => ${file.name}"
+            processSong(file, directoryList)
+
+        } else {
+
+            println "-- ${file.name} is not a MP3 file"
+
+        }
+
+    }
+
+}
+
+
+/**
+ *
+ */
+void printDirectoryList(directoryList) {
+
+    println ">> Great! where you want to move this song?"
+    directoryList.eachWithIndex { dirName, i ->
+        println "    [${i}] ${dirName}"
+    }
+
+}
+
+
+/**
+ * Shows the directory list and classifies a MP3 file
+ *
+ * @param song the MP3 song to classify
+ * @param directoryList the list of directories where the user can move the songs
+ */
+void classifySong(song, directoryList) {
+
+    printDirectoryList(directoryList)
+
+}
+
+
+/**
+ * Plays and classifies a MP3 file
+ *
+ * @param song the song
+ * @param directoryList the list of directories where the user can move the songs
+ * @return void
+ */
+void processSong(song, directoryList) {
+
+    new Player(song.newInputStream()).play()
+
+    classifySong(song, directoryList)
+
+}
+
+
 // Main code
 println ">> Checking arguments"
 if (args.size() >= 2) {
@@ -50,21 +117,7 @@ if (args.size() >= 2) {
     if (checkDirectories(args)) {
 
         println ">> Don't stop the music!!"
-        new File('.').eachFile { file ->
-
-            if (file.name.endsWith('.mp3')) {
-
-                println "++ Now playing => ${file.name}"
-                def song = new File(file.name)
-                new Player(song.newInputStream()).play()
-
-            } else {
-
-                println "-- ${file.name} is not a MP3 file"
-
-            }
-
-        }
+        classifyDirectory(args)
 
     }
 
